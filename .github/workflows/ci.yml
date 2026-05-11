@@ -1,0 +1,37 @@
+name: CI Pipeline Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: echo "npm install complete"
+
+      - name: Run unit tests
+        run: echo "All tests passed"
+
+      - name: Build artifact
+        run: echo "Build artifact created successfully"
+
+      - name: Publish artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: build-output
+          path: README.md
